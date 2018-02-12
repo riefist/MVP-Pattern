@@ -1,4 +1,4 @@
-package com.muhamadarief.ngulikmvppattern.views.main;
+package com.muhamadarief.ngulikmvppattern.ui.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,17 +9,17 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.muhamadarief.ngulikmvppattern.R;
-import com.muhamadarief.ngulikmvppattern.adapter.UserRecyclerAdapter;
-import com.muhamadarief.ngulikmvppattern.model.EmployeeModel;
+import com.muhamadarief.ngulikmvppattern.adapter.DataAdapter;
+import com.muhamadarief.ngulikmvppattern.model.Android;
 import com.muhamadarief.ngulikmvppattern.model.User;
-import com.muhamadarief.ngulikmvppattern.model.service.ApiService;
-import com.muhamadarief.ngulikmvppattern.presenter.main.MainPresenterImpl;
 
-public class MainActivity extends AppCompatActivity implements MainView, UserRecyclerAdapter.OnItemClickListener {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements MainView, DataAdapter.OnItemClickListener {
 
     private MainPresenterImpl presenter;
     private RecyclerView recyclerView;
-    private UserRecyclerAdapter adapter;
+    private DataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainView, UserRec
     }
 
     private void initPresenter(){
-        presenter = new MainPresenterImpl(new ApiService(this));
+        presenter = new MainPresenterImpl();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MainView, UserRec
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.loadDataEmployee();
+        presenter.loadListAndroid();
     }
 
     @Override
@@ -58,22 +58,17 @@ public class MainActivity extends AppCompatActivity implements MainView, UserRec
     }
 
     private void initRecyclerView(){
-        adapter = new UserRecyclerAdapter(this);
+        adapter = new DataAdapter(this);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
-
     @Override
-    public void onItemClick(EmployeeModel.Data user) {
-        Toast.makeText(this, ""+user.getName(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onShowEmployee(EmployeeModel employeeModel) {
-        adapter.replaceData(employeeModel.getData());
+    public void onShowListAndroid(List<Android> androidList) {
+        adapter.setListAndroid(androidList);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -99,4 +94,8 @@ public class MainActivity extends AppCompatActivity implements MainView, UserRec
     }
 
 
+    @Override
+    public void onItemClicked(Android android) {
+        Toast.makeText(this, android.getName(), Toast.LENGTH_SHORT).show();
+    }
 }

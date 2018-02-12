@@ -1,6 +1,6 @@
-package com.muhamadarief.ngulikmvppattern.views.login;
+package com.muhamadarief.ngulikmvppattern.ui.register;
 
-import com.muhamadarief.ngulikmvppattern.base.BaseView;
+import com.muhamadarief.ngulikmvppattern.ui.base.BaseView;
 import com.muhamadarief.ngulikmvppattern.model.User;
 
 /**

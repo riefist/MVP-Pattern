@@ -1,4 +1,4 @@
-package com.muhamadarief.ngulikmvppattern.base;
+package com.muhamadarief.ngulikmvppattern.ui.base;
 
 /**
  * Created by riefist on 1/3/18.

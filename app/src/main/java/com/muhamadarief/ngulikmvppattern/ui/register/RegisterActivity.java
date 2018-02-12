@@ -1,4 +1,4 @@
-package com.muhamadarief.ngulikmvppattern.views.login;
+package com.muhamadarief.ngulikmvppattern.ui.register;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +10,7 @@ import android.widget.Toast;
 
 import com.muhamadarief.ngulikmvppattern.R;
 import com.muhamadarief.ngulikmvppattern.model.User;
-import com.muhamadarief.ngulikmvppattern.presenter.register.RegisterPresenter;
-import com.muhamadarief.ngulikmvppattern.presenter.register.RegisterPresenterImpl;
-import com.muhamadarief.ngulikmvppattern.views.main.MainActivity;
+import com.muhamadarief.ngulikmvppattern.ui.main.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
 
@@ -33,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        //initToolbar();
         addButtonListener();
     }
 
@@ -64,13 +61,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         final EditText edtEmail = findViewById(R.id.edt_email);
         final EditText edtPassword = findViewById(R.id.edt_password);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = edtEmail.getText().toString();
-                String password = edtPassword.getText().toString();
-                presenter.registerUser(email, password);
-            }
+        btnRegister.setOnClickListener(view -> {
+            String email = edtEmail.getText().toString();
+            String password = edtPassword.getText().toString();
+            presenter.registerUser(email, password);
         });
     }
 }

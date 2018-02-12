@@ -1,15 +1,17 @@
-package com.muhamadarief.ngulikmvppattern.views.main;
+package com.muhamadarief.ngulikmvppattern.ui.main;
 
-import com.muhamadarief.ngulikmvppattern.base.BaseView;
-import com.muhamadarief.ngulikmvppattern.model.EmployeeModel;
+import com.muhamadarief.ngulikmvppattern.model.Android;
+import com.muhamadarief.ngulikmvppattern.ui.base.BaseView;
 import com.muhamadarief.ngulikmvppattern.model.User;
+
+import java.util.List;
 
 /**
  * Created by riefist on 1/3/18.
  */
 
 public interface MainView extends BaseView {
-    void onShowEmployee(EmployeeModel employeeModel);
+    void onShowListAndroid(List<Android> androidList);
     void onFailureGetData(String message);
     void onGetUser();
     void onShowUser(User user);

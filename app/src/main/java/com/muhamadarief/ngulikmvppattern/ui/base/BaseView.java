@@ -1,4 +1,4 @@
-package com.muhamadarief.ngulikmvppattern.base;
+package com.muhamadarief.ngulikmvppattern.ui.base;
 
 import android.content.Context;
 

@@ -1,9 +1,8 @@
-package com.muhamadarief.ngulikmvppattern.presenter.register;
+package com.muhamadarief.ngulikmvppattern.ui.register;
 
 import android.text.TextUtils;
 
 import com.muhamadarief.ngulikmvppattern.model.User;
-import com.muhamadarief.ngulikmvppattern.views.login.RegisterView;
 
 /**
  * Created by riefist on 1/3/18.
