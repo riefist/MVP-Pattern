@@ -1,18 +1,14 @@
 package com.muhamadarief.ngulikmvppattern.ui.main;
 
-import android.widget.Toast;
-
 import com.muhamadarief.ngulikmvppattern.model.Android;
 import com.muhamadarief.ngulikmvppattern.model.User;
-import com.muhamadarief.ngulikmvppattern.network.ApiClient;
-import com.muhamadarief.ngulikmvppattern.network.ApiInterface;
+import com.muhamadarief.ngulikmvppattern.network.ApiService;
+import com.muhamadarief.ngulikmvppattern.network.NetworkCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by riefist on 1/3/18.
@@ -39,12 +35,20 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void loadListAndroid() {
-        ApiInterface apiInterface = ApiClient.getAPIService();
-        compositeDisposable.add(apiInterface.listAndroid()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError));
+    public void loadListAndroid(ApiService service) {
+        Disposable disposable = service.androidVersion(new NetworkCallback<List<Android>>() {
+            @Override
+            public void onSuccess(List<Android> response) {
+                view.onShowListAndroid(response);
+                view.hideProggressBar();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                view.onFailureGetData(e.toString());
+            }
+        });
+        compositeDisposable.add(disposable);
     }
 
     @Override
@@ -52,14 +56,4 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
         view.onShowUser(user);
     }
 
-    @Override
-    public void handleResponse(List<Android> androids) {
-        view.onShowListAndroid(androids);
-        view.hideProggressBar();
-    }
-
-    @Override
-    public void handleError(Throwable error) {
-        view.onFailureGetData(error.toString());
-    }
 }

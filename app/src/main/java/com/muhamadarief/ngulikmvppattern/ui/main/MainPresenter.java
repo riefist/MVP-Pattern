@@ -1,6 +1,7 @@
 package com.muhamadarief.ngulikmvppattern.ui.main;
 
 import com.muhamadarief.ngulikmvppattern.model.Android;
+import com.muhamadarief.ngulikmvppattern.network.ApiService;
 import com.muhamadarief.ngulikmvppattern.ui.base.BasePresenter;
 import com.muhamadarief.ngulikmvppattern.model.User;
 
@@ -12,8 +13,6 @@ import java.util.List;
 
 public interface MainPresenter<V> extends BasePresenter<V> {
 
-    void loadListAndroid();
+    void loadListAndroid(ApiService service);
     void showUser(User user);
-    void handleResponse(List<Android> androids);
-    void handleError(Throwable error);
 }

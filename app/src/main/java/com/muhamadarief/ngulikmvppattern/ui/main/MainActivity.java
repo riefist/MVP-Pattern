@@ -8,14 +8,21 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.muhamadarief.ngulikmvppattern.MyApp;
 import com.muhamadarief.ngulikmvppattern.R;
 import com.muhamadarief.ngulikmvppattern.adapter.DataAdapter;
+import com.muhamadarief.ngulikmvppattern.deps.provider.ApplicationProvider;
 import com.muhamadarief.ngulikmvppattern.model.Android;
 import com.muhamadarief.ngulikmvppattern.model.User;
+import com.muhamadarief.ngulikmvppattern.network.ApiService;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity implements MainView, DataAdapter.OnItemClickListener {
+
+    @Inject ApiService service;
 
     private MainPresenterImpl presenter;
     private RecyclerView recyclerView;
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainView, DataAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((ApplicationProvider)this.getApplication()).providesApplicationComponent().inject(this);
         initPresenter();
         onAttachView();
     }
@@ -48,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MainView, DataAda
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.loadListAndroid();
+        presenter.loadListAndroid(service);
     }
 
     @Override
