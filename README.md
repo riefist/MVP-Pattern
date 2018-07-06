@@ -1,2 +1,2 @@
 # MVP-Pattern
-MVP Pattern with retrofit 2 + rxjava2
+MVP Pattern with dagger2 + retrofit 2 + rxjava2
